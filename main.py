@@ -11,20 +11,15 @@ fileNameAlbum = 'album.txt'
 
 def options():
     print("\n--------------ГОЛОВНЕ МЕНЮ--------------")
-    print("1: Додати фотографа")
-    print("2: Додати фото в альбом")
-
-    print("3: Список фотографів повний")
-    print("4: Список фотографів вибірково")
-
-    print("5: Список фотографій в альбомі")
-    
-    print("6: Вивести фото")
-    print("7: Вивести опис фотографії")
-    
-    print("8: Очистити вікно")
-    print("9: Зберегти дані y файл")
-    print("10: EXIT")
+    print("1: Список фотографів повний")
+    print("2: Список фотографій в альбомі")
+    print("3: Список фотографів вибірково")
+    print("4: Додати інформацію про фотографа")
+    print("5: Додати фото в альбом")
+    print("6: Видалити фото за назвою ")
+    print("7: Зберегти дані y файл")
+    print("8: Редагувати інформацію про фотографа")
+    print("9: EXIT")
 
 def getDate() -> date:
     year = int(input("  рік: "))
@@ -60,6 +55,34 @@ while True:
     option = input("--Виберіть пункт меню: ")
 
     if option == '1':
+        masters.print()
+
+    elif option == '2':
+        album.print()
+
+    elif option == '8': 
+        fullname = input("--Введіть прізвище та ім'я фотографа повністю: ")
+        artist = masters.get_masters(fullname)   
+        if(artist):
+            while input("---Введіть '+' щоб продовжити редагування: ") == '+':
+                key = input("Введіть назву поля (fullname, practice, cost, phone): ")
+                value  = input("Введіть нове значення: ")
+                if(key in ['cost', 'practice']):
+                    value = int(value)
+                artist.edit(key, value)
+                     
+            masters.save(fileNameMasters)
+               
+        else:
+            print("!!! Товар " + name + " не знайдено")
+
+    elif option == '3':
+        print("Поля: fullname, practice, cost, phone")
+        key = input("Введіть поле для пошуку: ")
+        value = input("Введіть значення для пошуку: ")
+        masters.filter(key, value)
+
+    elif option == '4':
         # 'fullname', 'practice', 'cost', 'phone'
         print("Інформація про фоторафа")
         fullname = input("Введіть ПІП: ")
@@ -68,7 +91,8 @@ while True:
         phone = input("Введіть контактний номер телефону: ")
         artist = Artist(fullname, practice, cost, phone)
         masters.add(artist)
-    elif option == '2':
+    
+    elif option == '5':
         # 'name', 'image', 'date', 'time', 'descr', 'autor'
         nameP = input("Введіть назву фото: ")
         image = input("Задайте шлях до файлу: ")
@@ -89,36 +113,16 @@ while True:
                 album.add(photo)
                 break
 
-    elif option == '3':
-        masters.print()
-
-    elif option == '4':
-        print("Поля: fullname, practice, cost, phone")
-        key = input("Введіть поле для пошуку: ")
-        value = input("Введіть значення для пошуку: ")
-        masters.filter(key, value)
-
-    elif option == '5':
-        album.print()
- 
-
     elif option == '6':
-        index = int(input("Введіть індекс фото в альбомі (0 - перший): "))
-        album.open('image', index)
+        name=input("Введіть назву фото, що бажаєте видалити ")
+        album.delete(name)
 
     elif option == '7':
-        index = int(input("Введіть індекс фото в альбомі (0 - перший): "))
-        album.open('description', index)
-    
-    elif option == '8':
-                os.system('cls')
-                options()
-
-    elif option == '9':
         masters.save(fileNameMasters)
         album.save(fileNameAlbum)
 
     
-    elif option == '10':
+
+    elif option == '9':
         break    
-print("ДО ЗУСТРІЧІ!!!")
+print("РОБОТУ ЗАВЕРШЕНО!")

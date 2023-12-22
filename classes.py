@@ -8,6 +8,7 @@ class Artist():
         self.__practice = practice
         self.__cost = cost
         self.__phone = phone
+
     def get(self, key) ->  None:
         if key == 'fullname':
             value = self.__fullname
@@ -21,6 +22,7 @@ class Artist():
             print("Key's incorrect!")
             return
         return value
+    
     def print(self):
         return(
             "{0:50} {1:10} {2:6} {3:50}".format(
@@ -30,6 +32,7 @@ class Artist():
                 self.__phone
             )
         )
+    
     def pars(self, row):
         try:
             row_split = row.strip().split(',')
@@ -39,6 +42,7 @@ class Artist():
             self.__phone = row_split[3]
         except:
             print("Error pars data from file")
+    
     def join(self):
         return(','.join(
             (self.__fullname,
@@ -47,6 +51,18 @@ class Artist():
             self.__phone)
         )
     )
+
+    def edit(self, key, value):
+        print('!!!', key, value)
+        if (key == "fullname"):
+            self.__fullname = value
+        if (key == "practice"):
+            self.__practice = value
+        if (key == "cost"):
+            self.__cost = value
+        if (key == "phone"):
+            self.__phone = value
+        print("!!! Редагування завершене успішно")
 
 #Клас Photo() описано:
 class Photo():
@@ -126,21 +142,25 @@ class Photo():
 class Masters():
     def __init__(self):
         self.__masters = []
+    
     def add(self, artist:Artist):
         self.__masters.append(artist)
+    
     def select (self, value) -> None:
         for artist in self.__masters:
             if value == artist.get('fullname'):
                 return artist
+    
     def filter(self, key:str, value):
         self.__print_header()
         for artist in self.__masters:
             val = artist.get(key)
             if val != None:
-                if key == 'practice' or key == 'cost' and val == int(value):
+                if (key == 'practice' or key == 'cost') and val >= int(value):
                     print(artist.print())
-                elif key == 'fullname' or key == 'phone' and value in val:
+                elif (key == 'fullname' or key == 'phone') and value in val:
                     print(artist.print())
+                    
     def read(self, fileName):
         try:
             file_reader = open (fileName, mode = 'r', encoding='utf-8')
@@ -153,6 +173,7 @@ class Masters():
             print("Read from file succesfull")
         except:
             print("Error read from file" + fileName)
+
     def save(self, fileName):
         try:
             file_writer = open (fileName, mode = 'w', encoding='utf-8')
@@ -161,14 +182,36 @@ class Masters():
             file_writer.close()
         except:
             print("Error save to file" + fileName)
+
     def print(self):
         self.__print_header()
         for i in range(len(self.__masters)):
             print(self.__masters[i].print()+"("+str(i)+")")
+    
     def __print_header(self):
         print(
             "{0:50} {1:10} {2:6} {3:50}".format('fullname', 'practice', 'cost', 'phone')
         )
+
+    def get(self,key):
+        if (key=="fullname"):
+            value=self.__fullname
+        elif (key=="practice"):
+            value=self.__practice
+        elif (key=="cost"):
+            value=self.__cost
+        elif (key=="phone"):
+            value=self.__phone
+        
+        else:
+            print("задано не існуюче поле")
+        return value
+
+    def get_masters(self, value): 
+        for master in self.__masters:
+            if(value == master.get("fullname")):
+                return master
+       
 
 #Клас Album() описано:
 
@@ -177,6 +220,7 @@ class Album():
         self.__album = []
     def add(self, photo):
         self.__album.append(photo)
+
     def filter(self, key, value):
         self.__print_header()
         for photo in self.__album:
@@ -187,6 +231,7 @@ class Album():
         self.__print_header()
         for i in range(len(self.__album)):
             print(self.__album[i].print() + "("+str(i)+")")
+
     def read(self, fileName):
         try:
             file_reader = open (fileName, mode = 'r', encoding='utf-8')
@@ -220,3 +265,12 @@ class Album():
 
     def __print_header(self):
         print("{0:20} {1:30} {2:15} {3:10} {4:30} {5:15}".format('name', 'image', 'date', 'time', 'descr', 'autor'))
+
+    def delete(self, name):
+        success = False # змінна успішне завершення
+        for i in range(len(self.__album)):
+            if (self.__album[i].get("name") == name): # шукає поле з іменем name
+                self.__album.remove(self.__album[i])
+                success = True
+                break
+        return False
