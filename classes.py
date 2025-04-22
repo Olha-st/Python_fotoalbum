@@ -267,9 +267,9 @@ class Album():
         print("{0:20} {1:30} {2:15} {3:10} {4:30} {5:15}".format('name', 'image', 'date', 'time', 'descr', 'autor'))
 
     def delete(self, name):
-        success = False # змінна успішне завершення
+        success = False
         for i in range(len(self.__album)):
-            if (self.__album[i].get("name") == name): # шукає поле з іменем name
+            if (self.__album[i].get("name") == name):
                 self.__album.remove(self.__album[i])
                 success = True
                 break
