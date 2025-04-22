@@ -4,5 +4,4 @@ Curiosity_1,http://surl.li/nbzma,02/02/2022,02:02,http://surl.li/nbzmn,Савч�
 Сервісний,http://surl.li/ncbhf,05/07/2023,11:15,http://surl.li/ncbeh,Парфан Микола
 Іграшка,http://surl.li/ncbhy,15/11/2022,14:10,http://surl.li/ncbiu,Кіт Дмитро
 Фантом,http://surl.li/ncbjn,14/10/2022,12:05,http://surl.li/ncbkg,Савчук Олександр
-AIBO,http://surl.li/ncbku,14/06/2023,15:45,http://surl.li/nigjn,Білоган Ольга
-AIBO,http://surl.li/ncbku,14/06/2023,15:45,http://surl.li/nigjn,Білоган Ольга
+
