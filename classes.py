@@ -274,3 +274,12 @@ class Album():
                 success = True
                 break
         return False
+
+    def delete(self, name):
+        success = False # змінна успішне завершення
+        for i in range(len(self.__album)):
+            if (self.__album[i].get("name") == name): # шукає поле з іменем name
+                self.__album.remove(self.__album[i])
+                success = True
+                break
+        return False
