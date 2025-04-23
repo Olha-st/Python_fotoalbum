@@ -20,6 +20,7 @@ def options():
     print("7: Зберегти дані y файл")
     print("8: Редагувати інформацію про фотографа")
     print("9: EXIT")
+    print("10: EXIT")
 
 def getDate() -> date:
     year = int(input("  рік: "))
