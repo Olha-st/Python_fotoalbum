@@ -3,11 +3,12 @@ from datetime import datetime, date, time
 import webbrowser
 
 class Artist():
-    def __init__(self, fullname:str, practice:int, cost:int, phone:str):
+    def __init__(self, fullname:str, practice:int, cost:int, phone:str, adress):
         self.__fullname = fullname
         self.__practice = practice
         self.__cost = cost
         self.__phone = phone
+        self.__adress = adress
 
     def get(self, key) ->  None:
         if key == 'fullname':
